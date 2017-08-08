@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name       PerfectMatch
-// @version    1.0
+// @version    1.1
 // @description  Add Perfect match
 // @match      https://www.pixiv.net/search.php*
 // @author     moxtsuan
@@ -10,7 +10,7 @@
 
 var url = location.href;
 var target = document.getElementsByClassName('column-header');
-var mode = 'tag';
+var mode = 'none';
 if ( url.match(/s_mode=s_tag_full/) ) {
   mode = 'tag_full';
 } else if ( url.match(/s_mode=s_tag/) ) {
@@ -21,6 +21,11 @@ if ( url.match(/s_mode=s_tag_full/) ) {
 var tag = url.replace(/s_mode=s_(tag_full|tag|tc)/, 's_mode=s_tag');
 var tag_full = url.replace(/s_mode=s_(tag_full|tag|tc)/, 's_mode=s_tag_full');
 var tc = url.replace(/s_mode=s_(tag_full|tag|tc)/, 's_mode=s_tc');
+if ( mode == 'none' ) {
+  tag = url + '&s_mode=s_tag';
+  tag_full = url + '&s_mode=s_tag_full';
+  tc = url + '&s_mode=s_tc';
+}
 var a_tag;
 if ( mode == 'tag' ) {
   a_tag = document.createElement('p');

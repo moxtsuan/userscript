@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name       PerfectMatch
-// @version    1.1
+// @version    1.2
 // @description  Add Perfect match
 // @match      https://www.pixiv.net/search.php*
 // @author     moxtsuan
@@ -18,13 +18,14 @@ if ( url.match(/s_mode=s_tag_full/) ) {
 } else if ( url.match(/s_mode=s_tc/) ) {
   mode = 'tc';
 }
-var tag = url.replace(/s_mode=s_(tag_full|tag|tc)/, 's_mode=s_tag');
-var tag_full = url.replace(/s_mode=s_(tag_full|tag|tc)/, 's_mode=s_tag_full');
-var tc = url.replace(/s_mode=s_(tag_full|tag|tc)/, 's_mode=s_tc');
+var p1 = url.replace(/&p=[0-9]+/, '');
+var tag = p1.replace(/s_mode=s_(tag_full|tag|tc)/, 's_mode=s_tag');
+var tag_full = p1.replace(/s_mode=s_(tag_full|tag|tc)/, 's_mode=s_tag_full');
+var tc = p1.replace(/s_mode=s_(tag_full|tag|tc)/, 's_mode=s_tc');
 if ( mode == 'none' ) {
-  tag = url + '&s_mode=s_tag';
-  tag_full = url + '&s_mode=s_tag_full';
-  tc = url + '&s_mode=s_tc';
+  tag = p1 + '&s_mode=s_tag';
+  tag_full = p1 + '&s_mode=s_tag_full';
+  tc = p1 + '&s_mode=s_tc';
 }
 var a_tag;
 if ( mode == 'tag' ) {

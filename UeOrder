@@ -1,0 +1,17 @@
+// ==UserScript==
+// @name         UeOrder
+// @version      1.0
+// @description  Add order to top
+// @match     https://www.pixiv.net/search.php*
+// @author    moxtsuan
+// @license    MIT
+// @grant      none
+// ==/UserScript==
+
+var com = document.getElementsByClassName('column-order-menu');
+if ( com ) {
+    var topcom = com[1].cloneNode(true);
+    var par  = document.getElementsByClassName('_unit');
+    var csr = document.querySelector('.column-search-result');
+    par[0].insertBefore(topcom, csr);
+}
